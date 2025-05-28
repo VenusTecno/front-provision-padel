@@ -12,7 +12,7 @@ COPY . .
 #ENV VITE_WEBSOCKT_BASE_URL=https://wahitechdicbackoffice.biscatos.com/api
 #ENV VITE_API_BASE_URL=http://10.11.1.190:9902
 #ENV VITE_WEBSOCKT_BASE_URL=http://10.11.1.190:9903
-ENV VITE_API_BASE_URL=http://62.171.161.77:9902
+ENV VITE_API_BASE_URL=https://apiscore.jokerpadelhub.co.ao
 ENV VITE_WEBSOCKT_BASE_URL=http://62.171.161.77:9903
 RUN npm run build
 
