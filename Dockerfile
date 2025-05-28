@@ -13,7 +13,7 @@ COPY . .
 #ENV VITE_API_BASE_URL=http://10.11.1.190:9902
 #ENV VITE_WEBSOCKT_BASE_URL=http://10.11.1.190:9903
 ENV VITE_API_BASE_URL=https://apiscore.jokerpadelhub.co.ao
-ENV VITE_WEBSOCKT_BASE_URL=https://serv.jokerpadelhub.co.ao
+ENV VITE_WEBSOCKT_BASE_URL=https://api-scoreboard-production.up.railway.app
 RUN npm run build
 
 # Etapa 2: Servir o app com Nginx
