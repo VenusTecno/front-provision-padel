@@ -19,6 +19,7 @@ RUN npm run build
 # Etapa 2: Servir o app com Nginx
 FROM nginx:alpine AS production
 
+
 COPY --from=builder /app/dist /usr/share/nginx/html
 
 # ✅ Copiando a configuração correta do Nginx para suportar SPA
