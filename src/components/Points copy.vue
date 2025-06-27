@@ -519,42 +519,16 @@ const increment = () => gameParts .value++;
 
   const incrementSetPlayer1 = (set) =>{ 
     setPlayer1.value[set]++;
-    incrementPointSetPlayer1(setPlayer1.value[set]);
-  }
-
-  const incrementPointSetPlayer1 = (score) =>{
-    player1Games.value = score;
   }
   const decrementSetPlayer1 = (set) => {
-    if (setPlayer1.value[set] > 0){
-        setPlayer1.value[set]--;
-        decrementPointSetPlayer1(setPlayer1.value[set])
-    }
-  };
-
-  const decrementPointSetPlayer1 = (score) => {
-    player1Games.value = score;
+    if (setPlayer1.value[set] > 0) setPlayer1.value[set]--;
   };
 
 
-  const incrementSetPlayer2 = (set) => {
-    setPlayer2.value[set]++;
-    incrementPointSetPlayer2(setPlayer2.value[set])
-  }
-
- const incrementPointSetPlayer2 = (score) => {
-    player2Games.value = score;
- }
+  const incrementSetPlayer2 = (set) => setPlayer2.value[set]++;
   const decrementSetPlayer2 = (set) => {
-    if (setPlayer2.value[set] > 0){
-       setPlayer2.value[set]--;
-       decrementPointSetPlayer2(setPlayer2.value[set])
-    }
+    if (setPlayer2.value[set] > 0) setPlayer2.value[set]--;
   };
-
-const decrementPointSetPlayer2 = (score) => {
-  player2Games.value = score;
-}
   
 
   
