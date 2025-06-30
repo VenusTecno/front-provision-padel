@@ -326,7 +326,6 @@ console.log("emitGameUpdate",data)
     }
   };
 
-
   const formattedTime = computed(() => {
     const minutes = String(Math.floor(timer.value / 60)).padStart(2, '0');
     const seconds = String(timer.value % 60).padStart(2, '0');
