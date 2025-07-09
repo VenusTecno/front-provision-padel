@@ -45,9 +45,9 @@
                 <button v-if="value!==null" class="btn btn-outline-primary rounded-circle" @click="incrementSetPlayer1(set)">+</button>
             </div>
             <div class="d-flex mb-2 justify-content-between align-items-center">
-                <button :class="deuceRule === 'advantage'? 'btn btn-success rounded-circle': deuceRule==='goldenPoint'?'btn btn-warning text-white rounded-circle':'btn btn-primary rounded-circle'" @click="decrementPlayer1">-</button>
+                <button :class="deuceRule === 'advantage'? 'btn btn-success rounded-circle':player1Score === 40 && player2Score === 40 && deuceRule==='goldenPoint'?'btn btn-warning text-white rounded-circle':'btn btn-primary rounded-circle'" @click="decrementPlayer1">-</button>
                 <span class="fs-3 px-2">{{ player1Score }}</span>
-                <button :class="deuceRule === 'advantage'? 'btn btn-success rounded-circle': deuceRule==='goldenPoint'?'btn btn-warning text-white rounded-circle':'btn btn-primary rounded-circle'" @click="incrementPlayer1" :disabled="gameOver || isTieBreak">+</button>
+                <button :class="deuceRule === 'advantage'? 'btn btn-success rounded-circle':player1Score === 40 && player2Score === 40 && deuceRule==='goldenPoint'?'btn btn-warning text-white rounded-circle':'btn btn-primary rounded-circle'" @click="incrementPlayer1" :disabled="gameOver || isTieBreak">+</button>
             </div>
           </div>
         </div>
@@ -63,9 +63,9 @@
 				<button v-if="value!==null" class="btn btn-outline-primary rounded-circle" @click="incrementSetPlayer2(set)">+</button>
 			</div>
 			<div class="d-flex mb-2 justify-content-between align-items-center">
-				<button :class="deuceRule === 'advantage'? 'btn btn-success rounded-circle': deuceRule==='goldenPoint'?'btn btn-warning text-white rounded-circle':'btn btn-primary rounded-circle'" @click="decrementPlayer2">-</button>
+				<button :class="deuceRule === 'advantage'? 'btn btn-success rounded-circle':player1Score === 40 && player2Score === 40 && deuceRule==='goldenPoint'?'btn btn-warning text-white rounded-circle':'btn btn-primary rounded-circle'" @click="decrementPlayer2">-</button>
 				<span class="fs-3 px-2">{{ player2Score }}</span>
-				<button :class="deuceRule === 'advantage'? 'btn btn-success rounded-circle': deuceRule==='goldenPoint'?'btn btn-warning text-white rounded-circle':'btn btn-primary rounded-circle'" @click="incrementPlayer2" :disabled="gameOver || isTieBreak">+</button>
+				<button :class="deuceRule === 'advantage'? 'btn btn-success rounded-circle':player1Score === 40 && player2Score === 40 && deuceRule==='goldenPoint'?'btn btn-warning text-white rounded-circle':'btn btn-primary rounded-circle'" @click="incrementPlayer2" :disabled="gameOver || isTieBreak">+</button>
 			</div>
           </div>
         </div>
@@ -95,6 +95,7 @@
                         </button>
                     </div> -->
 					<div class="p-3 border-custom shadow"  v-if="player1Score === 40 && player2Score === 40">
+					<!-- <div class="p-3 border-custom shadow"> -->
                           <p class="fs-4 fw-bolder">Escolha a regra do Deuce </p>
                           <div class="row g-3  align-items-center">
                             <div class="col">
@@ -106,13 +107,13 @@
                             </div>
                             </div>
                             <div class="col">
-								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="radio" id="gridRadios1" v-model="deuceRule" value="goldenPoint">
-									<label class="form-check-label" for="gridRadios2">
-									Ponto de Ouro
-									</label>
-								</div>
-							   </div>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" id="gridRadios1" v-model="deuceRule" value="goldenPoint">
+                              <label class="form-check-label" for="gridRadios2">
+                              Ponto de Ouro
+                              </label>
+                            </div>
+							         </div>
 							</div>
                           </div>
 
@@ -346,14 +347,16 @@ function applyDeuceRule(winner) {
       player1Games.value++;
       updateSetScore('player1');
       checkSetWinner();
-      deuceRule.value=''
+      /* deuceRule.value='' */
+      deuceRule.value='goldenPoint'
     } else {
       player2Score.value = 0;
       player1Score.value = 0;
       player2Games.value++;
       updateSetScore('player2');
       checkSetWinner();
-      deuceRule.value=''
+      /* deuceRule.value='' */
+      deuceRule.value='goldenPoint'
     }
   }
 }
@@ -557,7 +560,6 @@ const decrementPointSetPlayer2 = (score) => {
 }
   
 
-  
   const startTimer = () => {
     if (isRunning.value) {
       clearInterval(interval.value);
@@ -619,6 +621,7 @@ socket.on('timerUpdated', (data) => {
 });
 
  socket.on('gameUpdated', (data) => {
+ console.log('Game updatedAAAAAAAAA:', data);
   if (data.code === route.query.code) {
     deuceRule.value=data.deuceRule || ''
     currentSet.value=data.currentSet || 1
@@ -690,6 +693,7 @@ watch([player1, player2, sponsor,hideBoard,gameOver,deuceRule, timer,player1Scor
     timer: timer.value,
     deuceRule:deuceRule.value
   };
+  console.log('UPDATEGAMEPOINTS', data)
   socket.emit('updateGame', data); 
 });
 

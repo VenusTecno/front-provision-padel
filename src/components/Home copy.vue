@@ -131,6 +131,7 @@
      <div class="row justify-content-center text-white mb-4 g-4" v-if="route.query.c=='c'">
       
       <div class="col-3 border-custom shadow p-4">
+        <pre>{{ deuceRule }}</pre>
           <p>Games: <span class="fw-bold">{{ gameStore.player1Games }}</span></p>
           <input 
             :value="gameStore.player1"
@@ -538,8 +539,7 @@ const startStreaming = () => {
     scores: scores.value,
     hideBoard:hideBoard.value,
     gameOver:gameOver.value,
-    /* deuceRule:deuceRule.value || '', */
-    deuceRule:deuceRule.value || 'goldenPoint',
+    deuceRule:deuceRule.value || '',
     timer: timer.value,
   };
 

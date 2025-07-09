@@ -204,6 +204,7 @@ export const useGameStore = defineStore('game', () => {
   };
 
   const updateGameState = (data: GameState, isInitial: boolean = false) => {
+    console.log('UPDATEGAMESTATE DA STORE', data)
     if (data.code === codigo.value) {
       code.value = data.code;
       deuceRule.value = data.deuceRule;
